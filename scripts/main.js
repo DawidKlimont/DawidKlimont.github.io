@@ -1,10 +1,5 @@
-function multiply(num1, num2){
-    return num1*num2;
-}
-
 function setName() {
-    let user_name = prompt("Please enter your name");
-    
+    user_name = prompt("Please enter your name")
     localStorage.setItem("my_name", user_name);
 }
 
@@ -12,36 +7,43 @@ function setTitle(user_name){
     my_heading.textContent = "Hello "+user_name;
 }
 
-let text = "Funny Text";
-let is_text_set = true;
-
-//  Normal Comment
-/*
-*   Advanced Commenting
-*/
-
-const my_heading = document.querySelector("h1");
-if (is_text_set === true){
-    my_heading.textContent = text;
-}else {
-    alert("Error");
+function setImage(){
+    let src = my_image.getAttribute("src");
+    if(src === "images/Nero.jpg"){
+        my_image.setAttribute("src", "images/"+"beagle.jpg");
+    }else {
+        my_image.setAttribute("src", "images/Nero.jpg");
+    }
 }
 
-console.log(multiply(21, 20));
+function createListitem(){
+    item = document.createElement("li")
+    item.textContent = "New Element"
+    addChangeListitem(item)
+    my_list.appendChild(item);
+}
 
-let image = document.querySelector("img");
-image.addEventListener("click", function() {
-                                    let src = image.getAttribute("src");
-                                    if(src === "images/Nero.jpg"){
-                                        image.setAttribute("src", "images/beagle.jpg");
-                                    }
-                                });
-
-let myButton = document.querySelector("button");
-let my_name = "empty";
+function addChangeListitem(list_element){
+    list_element.onclick = () => {list_element.textContent = prompt("New Value");}
+}
 
 
-myButton.onclick = () => {
-                    setName();
-                    setTitle(localStorage.getItem("my_name"));
-                }
+let my_heading = document.querySelector("h1");
+let my_button = document.querySelector("button");
+
+let my_list_div = document.querySelector(".index");
+let my_list_title = my_list_div.querySelector("h3");
+let my_list = my_list_div.querySelector("ol");
+let my_list_elements = my_list.querySelectorAll("li")
+
+let my_image = document.querySelector("img");
+
+
+my_heading.textContent = "Sup"
+my_button.onclick = () => {setName(); setTitle(localStorage.getItem("my_name"));}
+my_list_title.onclick = () => {createListitem();}
+my_image.onclick = () => {setImage();}
+
+for (let i=0; i<my_list_elements.length; i++){
+    addChangeListitem(my_list_elements[i]);
+}
